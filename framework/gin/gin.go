@@ -15,6 +15,7 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/PengLei-Adam/lade/framework"
 	"github.com/PengLei-Adam/lade/framework/gin/internal/bytesconv"
 	"github.com/PengLei-Adam/lade/framework/gin/render"
 )
@@ -68,6 +69,9 @@ const (
 // Engine is the framework's instance, it contains the muxer, middleware and configuration settings.
 // Create an instance of Engine, by using New() or Default()
 type Engine struct {
+	// 加入Container
+	container framework.Container
+
 	RouterGroup
 
 	// Enables automatic redirection if the current route can't be matched but a

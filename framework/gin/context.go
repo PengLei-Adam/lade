@@ -20,6 +20,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/PengLei-Adam/lade/framework"
 	"github.com/PengLei-Adam/lade/framework/gin/binding"
 	"github.com/PengLei-Adam/lade/framework/gin/render"
 	"github.com/gin-contrib/sse"
@@ -45,6 +46,10 @@ const abortIndex int8 = math.MaxInt8 / 2
 // Context is the most important part of gin. It allows us to pass variables between middleware,
 // manage the flow, validate the JSON of a request and render a JSON response for example.
 type Context struct {
+
+	// 加入 Container
+	container framework.Container
+
 	writermem responseWriter
 	Request   *http.Request
 	Writer    ResponseWriter
