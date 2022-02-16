@@ -22,6 +22,9 @@ type Context struct {
 
 	// 路由参数map
 	params map[string]string
+
+	// Container
+	LadeContainer
 }
 
 func (ctx *Context) BaseContext() context.Context {
