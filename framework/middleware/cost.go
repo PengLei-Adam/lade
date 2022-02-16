@@ -1,9 +1,10 @@
 package middleware
 
 import (
-	"coredemo/framework"
 	"log"
 	"time"
+
+	"github.com/PengLei-Adam/lade/framework"
 )
 
 func Cost() framework.ControllerHandler {

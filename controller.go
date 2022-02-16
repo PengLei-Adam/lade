@@ -2,9 +2,10 @@ package main
 
 import (
 	"context"
-	"coredemo/framework"
 	"fmt"
 	"time"
+
+	"github.com/PengLei-Adam/lade/framework"
 )
 
 func FooControllerHandler(ctx *framework.Context) error {

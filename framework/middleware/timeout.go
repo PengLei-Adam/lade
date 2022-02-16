@@ -2,10 +2,11 @@ package middleware
 
 import (
 	"context"
-	"coredemo/framework"
 	"fmt"
 	"log"
 	"time"
+
+	"github.com/PengLei-Adam/lade/framework"
 )
 
 func Timeout(d time.Duration) framework.ControllerHandler {

@@ -1,6 +1,6 @@
 package middleware
 
-import "coredemo/framework"
+import "github.com/PengLei-Adam/lade/framework"
 
 // recovery机制，将协程中的函数异常进行捕获
 func Recovery() framework.ControllerHandler {

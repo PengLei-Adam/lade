@@ -2,12 +2,13 @@ package main
 
 import (
 	"context"
-	"coredemo/framework"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
+
+	"github.com/PengLei-Adam/lade/framework"
 )
 
 func main() {
