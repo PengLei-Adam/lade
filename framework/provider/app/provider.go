@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/PengLei-Adam/lade/framework"
+	"github.com/PengLei-Adam/lade/framework/contract"
 )
 
 // LadeAppProvider 提供 App 的具体实现方法
@@ -11,7 +12,7 @@ type LadeAppProvider struct {
 	BaseFolder string
 }
 
-var _ framework.ServiceProvider = &LadeAppProvider{""}
+var _ framework.ServiceProvider = &LadeAppProvider{"."}
 
 // Params 获取初始化参数
 func (h *LadeAppProvider) Params(container framework.Container) []interface{} {
@@ -20,7 +21,7 @@ func (h *LadeAppProvider) Params(container framework.Container) []interface{} {
 
 // Name方法返回字符串凭证
 func (sp *LadeAppProvider) Name() string {
-	return sp.BaseFolder
+	return contract.AppKey
 }
 
 func (sp *LadeAppProvider) Register(c framework.Container) framework.NewInstance {

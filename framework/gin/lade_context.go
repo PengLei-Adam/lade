@@ -20,6 +20,14 @@ func (engine *Engine) IsBind(key string) bool {
 	return engine.container.IsBind(key)
 }
 
+// 设置和获取Container
+func (engine *Engine) SetContainer(container framework.Container) {
+	engine.container = container
+}
+func (engine *Engine) GetContainer() framework.Container {
+	return engine.container
+}
+
 // context 实现container的几个封装
 
 // 实现make的封装

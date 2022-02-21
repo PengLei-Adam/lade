@@ -1,39 +1,25 @@
 package main
 
 import (
-	"context"
-	"log"
-	"net/http"
-	"os"
-	"os/signal"
-	"syscall"
-
+	"github.com/PengLei-Adam/lade/app/console"
+	"github.com/PengLei-Adam/lade/app/http"
 	"github.com/PengLei-Adam/lade/framework"
+	"github.com/PengLei-Adam/lade/framework/provider/app"
+	"github.com/PengLei-Adam/lade/provider/kernel"
 )
 
 func main() {
-	core := framework.NewCore()
-	registerRouter(core)
+	// 初始化服务容器
+	container := framework.NewLadeContainer()
+	// 绑定App服务提供者
+	container.Bind(&app.LadeAppProvider{})
+	// 后续绑定其他服务提供者
 
-	server := &http.Server{
-		Addr:    ":8080",
-		Handler: core,
+	// 将HTTP引擎初始化，并且作为服务提供者绑定到服务容器中
+	if engine, err := http.NewHttpEngine(); err == nil {
+		container.Bind(&kernel.LadeKernelProvider{HttpEngine: engine})
 	}
 
-	quit := make(chan os.Signal)
-
-	// 所有连接处理完成，再关闭
-	// 运行监听
-	go func() {
-		server.ListenAndServe()
-	}()
-
-	// 等待退出信号
-	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT)
-	<-quit
-
-	// 退出
-	if err := server.Shutdown(context.Background()); err != nil {
-		log.Fatal("Server shutdown: ", err)
-	}
+	// 运行root命令
+	console.RunCommand(container)
 }

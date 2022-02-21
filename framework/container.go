@@ -34,7 +34,7 @@ type LadeContainer struct {
 	lock sync.RWMutex
 }
 
-func NewladeContainer() *LadeContainer {
+func NewLadeContainer() *LadeContainer {
 	return &LadeContainer{
 		providers: map[string]ServiceProvider{},
 		instances: map[string]interface{}{},

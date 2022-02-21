@@ -25,6 +25,7 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/PengLei-Adam/lade/framework"
 	flag "github.com/spf13/pflag"
 )
 
@@ -36,6 +37,9 @@ type FParseErrWhitelist flag.ParseErrorsWhitelist
 // you to define the usage and description as part of your command
 // definition to ensure usability.
 type Command struct {
+	// 引入服务容器
+	container framework.Container
+
 	// Use is the one-line usage message.
 	// Recommended syntax is as follow:
 	//   [ ] identifies an optional argument. Arguments that are not enclosed in brackets are required.
