@@ -26,6 +26,7 @@ import (
 	"strings"
 
 	"github.com/PengLei-Adam/lade/framework"
+	"github.com/robfig/cron/v3"
 	flag "github.com/spf13/pflag"
 )
 
@@ -39,6 +40,10 @@ type FParseErrWhitelist flag.ParseErrorsWhitelist
 type Command struct {
 	// 引入服务容器
 	container framework.Container
+	// 引入cron定时器
+	Cron *cron.Cron
+	// cron展示信息
+	CronSpecs []CronSpec
 
 	// Use is the one-line usage message.
 	// Recommended syntax is as follow:
