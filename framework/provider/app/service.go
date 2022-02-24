@@ -7,11 +7,17 @@ import (
 
 	"github.com/PengLei-Adam/lade/framework"
 	"github.com/PengLei-Adam/lade/framework/util"
+	"github.com/google/uuid"
 )
 
 type LadeApp struct {
 	container  framework.Container
 	baseFolder string
+	appId      string
+}
+
+func (h LadeApp) AddID() string {
+	return h.appId
 }
 
 // BaseFolder 表示基础目录，可以代表开发场景的目录，也可以代表运行时候的目录
@@ -82,8 +88,16 @@ func NewLadeApp(params ...interface{}) (interface{}, error) {
 	if len(params) != 2 {
 		return nil, errors.New("param error")
 	}
+	// 通过uuid生成appid
+	appId := uuid.New().String()
+
 	// 有两个参数，一个是容器，一个是 baseFolder
 	container := params[0].(framework.Container)
 	baseFolder := params[1].(string)
-	return &LadeApp{baseFolder: baseFolder, container: container}, nil
+	// 如果没有设置，则使用参数
+	if baseFolder == "" {
+		flag.StringVar(&baseFolder, "base_folder", "", "base_folder参数, 默认为当前路径")
+		flag.Parse()
+	}
+	return &LadeApp{baseFolder: baseFolder, container: container, appId: appId}, nil
 }

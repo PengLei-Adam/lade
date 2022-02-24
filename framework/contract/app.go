@@ -5,6 +5,8 @@ const AppKey = "lade:app"
 
 // App 定义接口
 type App interface {
+	// AppID app唯一id,用于分布式锁
+	AppID() string
 	// Version 定义当前版本
 	Version() string
 	//BaseFolder 定义项目基础地址
