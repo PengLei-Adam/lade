@@ -6,6 +6,7 @@ import (
 	"github.com/PengLei-Adam/lade/framework"
 	"github.com/PengLei-Adam/lade/framework/provider/app"
 	"github.com/PengLei-Adam/lade/framework/provider/distributed"
+	"github.com/PengLei-Adam/lade/framework/provider/env"
 	"github.com/PengLei-Adam/lade/provider/kernel"
 )
 
@@ -16,6 +17,9 @@ func main() {
 	container.Bind(&app.LadeAppProvider{})
 	// 绑定分布式服务
 	container.Bind(&distributed.LocalDistributedProvider{})
+	// 绑定环境变量服务
+	// 未设置folder？？
+	container.Bind(&env.LadeEnvProvider{})
 	// 后续绑定其他服务提供者
 
 	// 将HTTP引擎初始化，并且作为服务提供者绑定到服务容器中

@@ -11,4 +11,7 @@ func AddKernelCommands(root *cobra.Command) {
 
 	// cron
 	root.AddCommand(initCronCommand())
+
+	// env
+	root.AddCommand(initEnvCommand())
 }
