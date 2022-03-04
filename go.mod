@@ -34,13 +34,14 @@ require (
 )
 
 require (
-	github.com/fsnotify/fsnotify v1.5.1 // indirect
-	github.com/google/uuid v1.3.0 
+	github.com/fsnotify/fsnotify v1.5.1
+	github.com/google/uuid v1.3.0
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/kardianos/osext v0.0.0-20190222173326-2bc1f35cddc0 // indirect
 	github.com/magiconair/properties v1.8.5 // indirect
-	github.com/mitchellh/mapstructure v1.4.3 // indirect
+	github.com/mitchellh/mapstructure v1.4.3
 	github.com/pelletier/go-toml v1.9.4 // indirect
+	github.com/pkg/errors v0.9.1
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/spf13/afero v1.6.0 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect

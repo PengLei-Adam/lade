@@ -14,6 +14,8 @@ type LadeApp struct {
 	container  framework.Container
 	baseFolder string
 	appId      string
+
+	configMap map[string]string // 配置加载
 }
 
 func (h LadeApp) AddID() string {
@@ -100,4 +102,10 @@ func NewLadeApp(params ...interface{}) (interface{}, error) {
 		flag.Parse()
 	}
 	return &LadeApp{baseFolder: baseFolder, container: container, appId: appId}, nil
+}
+
+func (app LadeApp) LoadAppConfig(kv map[string]string) {
+	for k, v := range kv {
+		app.configMap[k] = v
+	}
 }

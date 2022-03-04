@@ -16,6 +16,7 @@ func Register(r *gin.Engine) error {
 
 	r.GET("/demo/demo", api.Demo)
 	r.GET("/demo/demo2", api.Demo2)
+	r.GET("/demo/demo3", api.Demo3)
 	r.POST("/demo/demo_post", api.DemoPost)
 	return nil
 
@@ -66,4 +67,17 @@ func (api *DemoApi) DemoPost(c *gin.Context) {
 		c.AbortWithError(500, err)
 	}
 	c.JSON(200, nil)
+}
+
+// Demo godoc
+// @Summary 获取密码
+// @Description 获取数据库密码
+// @Produce  json
+// @Tags demo
+// @Success 200 string
+// @Router /demo/demo3 [get]
+func (api *DemoApi) Demo3(c *gin.Context) {
+	configService := c.MustMake(contract.ConfigKey).(contract.Config)
+	password := configService.GetString("database.mysql.password")
+	c.JSON(200, password)
 }
