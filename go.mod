@@ -52,7 +52,11 @@ require (
 
 require (
 	github.com/kr/text v0.2.0 // indirect
+	github.com/lestrrat-go/file-rotatelogs v2.4.0+incompatible
 	github.com/rogpeppe/go-internal v1.8.0 // indirect
+	github.com/rs/xid v1.3.0
 )
+
+require github.com/lestrrat-go/strftime v1.0.5 // indirect
 
 retract v1.7.5
