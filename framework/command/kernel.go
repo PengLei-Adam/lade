@@ -22,4 +22,7 @@ func AddKernelCommands(root *cobra.Command) {
 	root.AddCommand(initBuildCommand())
 	// npm [args...]
 	root.AddCommand(npmCommand)
+
+	// dev
+	root.AddCommand(initDevCommand())
 }

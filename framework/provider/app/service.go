@@ -40,49 +40,86 @@ func (h LadeApp) BaseFolder() string {
 
 // ConfigFolder  表示配置文件地址
 func (h LadeApp) ConfigFolder() string {
+	if val, ok := h.configMap["config_folder"]; ok {
+		return val
+	}
 	return filepath.Join(h.BaseFolder(), "config")
 }
 
 // LogFolder 表示日志存放地址
 func (h LadeApp) LogFolder() string {
+	if val, ok := h.configMap["log_folder"]; ok {
+		return val
+	}
 	return filepath.Join(h.StorageFolder(), "log")
 }
 
 func (h LadeApp) HttpFolder() string {
+	if val, ok := h.configMap["http_folder"]; ok {
+		return val
+	}
 	return filepath.Join(h.BaseFolder(), "http")
 }
 
 func (h LadeApp) ConsoleFolder() string {
+	if val, ok := h.configMap["console_folder"]; ok {
+		return val
+	}
 	return filepath.Join(h.BaseFolder(), "console")
 }
 
 func (h LadeApp) StorageFolder() string {
+	if val, ok := h.configMap["storage_folder"]; ok {
+		return val
+	}
 	return filepath.Join(h.BaseFolder(), "storage")
 }
 
 // ProviderFolder 定义业务自己的服务提供者地址
 func (h LadeApp) ProviderFolder() string {
+	if val, ok := h.configMap["provider_folder"]; ok {
+		return val
+	}
 	return filepath.Join(h.BaseFolder(), "provider")
 }
 
 // MiddlewareFolder 定义业务自己定义的中间件
 func (h LadeApp) MiddlewareFolder() string {
+	if val, ok := h.configMap["middleware_folder"]; ok {
+		return val
+	}
 	return filepath.Join(h.HttpFolder(), "middleware")
 }
 
 // CommandFolder 定义业务定义的命令
 func (h LadeApp) CommandFolder() string {
+	if val, ok := h.configMap["command_folder"]; ok {
+		return val
+	}
 	return filepath.Join(h.ConsoleFolder(), "command")
 }
 
 // RuntimeFolder 定义业务的运行中间态信息
 func (h LadeApp) RuntimeFolder() string {
+	if val, ok := h.configMap["runtime_folder"]; ok {
+		return val
+	}
 	return filepath.Join(h.StorageFolder(), "runtime")
 }
 
 // TestFolder 定义测试需要的信息
 func (h LadeApp) TestFolder() string {
+	if val, ok := h.configMap["test_folder"]; ok {
+		return val
+	}
 	return filepath.Join(h.BaseFolder(), "test")
+}
+
+func (h LadeApp) AppFolder() string {
+	if val, ok := h.configMap["app_folder"]; ok {
+		return val
+	}
+	return filepath.Join(h.BaseFolder(), "app")
 }
 
 // NewLadeApp 初始化 LadeApp
