@@ -1,7 +1,7 @@
 package console
 
 import (
-	"github.com/PengLei-Adam/lade/app/console/command/demo"
+	"github.com/PengLei-Adam/lade/app/console/command/foo"
 	"github.com/PengLei-Adam/lade/framework"
 	"github.com/PengLei-Adam/lade/framework/cobra"
 	"github.com/PengLei-Adam/lade/framework/command"
@@ -52,7 +52,7 @@ func RunCommand(container framework.Container) error {
 // 绑定业务的命令
 func AddAppCommand(rootCmd *cobra.Command) {
 	//  demo 例子
-	rootCmd.AddCommand(demo.InitFoo())
+	rootCmd.AddCommand(foo.InitFoo())
 
 	// 每秒调用一次Foo命令
 	//rootCmd.AddCronCommand("* * * * * *", demo.FooCommand)

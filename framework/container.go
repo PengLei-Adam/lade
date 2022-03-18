@@ -152,3 +152,13 @@ func (lade *LadeContainer) findServiceProvider(key string) ServiceProvider {
 	}
 	return sp
 }
+
+// NameList 列出容器中所有provider的字符串凭证
+func (lade *LadeContainer) NameList() []string {
+	ret := []string{}
+	for _, provider := range lade.providers {
+		name := provider.Name()
+		ret = append(ret, name)
+	}
+	return ret
+}
