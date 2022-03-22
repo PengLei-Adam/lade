@@ -26,7 +26,7 @@ func main() {
 	// 后续绑定其他服务提供者
 
 	// 将HTTP引擎初始化，并且作为服务提供者绑定到服务容器中
-	if engine, err := http.NewHttpEngine(); err == nil {
+	if engine, err := http.NewHttpEngine(container); err == nil {
 		container.Bind(&kernel.LadeKernelProvider{HttpEngine: engine})
 	}
 

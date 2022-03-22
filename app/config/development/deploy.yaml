@@ -1,0 +1,11 @@
+host: 127.0.0.1
+user: leip
+password: 123456
+rsa_key:
+timeout: 1000
+remote_path: "/home/leip"
+post_shell:
+  - "./lade serve restart"
+  - "pwd"
+goos: linux
+goarch: amd64

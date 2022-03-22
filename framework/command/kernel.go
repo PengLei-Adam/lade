@@ -22,6 +22,8 @@ func AddKernelCommands(root *cobra.Command) {
 	root.AddCommand(initBuildCommand())
 	// npm [args...]
 	root.AddCommand(npmCommand)
+	// go build
+	root.AddCommand(goCommand)
 
 	// dev
 	root.AddCommand(initDevCommand())
@@ -37,4 +39,7 @@ func AddKernelCommands(root *cobra.Command) {
 
 	// new
 	root.AddCommand(initNewCommand())
+
+	// swagger
+	root.AddCommand(initSwaggerCommand())
 }

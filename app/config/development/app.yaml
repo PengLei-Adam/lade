@@ -1,0 +1,12 @@
+swagger: true
+
+path:
+
+dev: # 调试模式
+    port: 8070 #调试模式监听的端口，默认为8070
+    backend: # 后端调试模式配置
+        refresh_time: 3 # 调试模式后端更新时间，文件变更后3秒后更新
+        port: 8072 # 后端监听端口，默认8072
+        monitor_folder: "" # 文件夹地址，为空或不填默认为AppFolder
+    frontend: # 前端调试模式配置
+        port: 8071 # 前端监听端口，默认8071
