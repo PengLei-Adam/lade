@@ -10,6 +10,7 @@ type DemoApi struct {
 	service *Service
 }
 
+// Register 添加路由规则
 func Register(r *gin.Engine) error {
 	api := NewDemoApi()
 	r.Bind(&demoService.DemoProvider{})
@@ -19,6 +20,7 @@ func Register(r *gin.Engine) error {
 	r.GET("/demo/demo3", api.Demo3)
 	r.POST("/demo/demo_post", api.DemoPost)
 	r.GET("/demo/orm", api.DemoOrm)
+	r.GET("/demo/cache/redis", api.DemoRedis)
 	return nil
 
 }

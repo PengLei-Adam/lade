@@ -1,0 +1,9 @@
+driver: redis # 使用redis存储
+host: 127.0.0.1
+port: 6379
+db: 0
+timeout: 10s
+read_timeout: 2s
+write_timeout: 2s
+
+# driver: memory #内部map存储
