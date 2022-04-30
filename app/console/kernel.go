@@ -10,14 +10,14 @@ import (
 // RunCommand is command
 //func RunCommand(container framework.Container) error {
 //	var rootCmd = &cobra.Command{
-//		Use:   "hade",
+//		Use:   "lade",
 //		Short: "main",
-//		Long:  "hade commands",
+//		Long:  "lade commands",
 //	}
 //
 //	ctx := commandUtil.RegiestContainer(container, rootCmd)
 //
-//	hadeCommand.AddKernelCommands(rootCmd)
+//	ladeCommand.AddKernelCommands(rootCmd)
 //
 //	// rootCmd.AddCronCommand("* * * * *", command.DemoCommand)
 //

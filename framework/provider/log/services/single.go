@@ -42,7 +42,7 @@ func NewLadeSingleLog(params ...interface{}) (interface{}, error) {
 		os.MkdirAll(folder, os.ModePerm)
 	}
 
-	log.file = "hade.log"
+	log.file = "lade.log"
 	if configService.IsExist("log.file") {
 		log.file = configService.GetString("log.file")
 	}

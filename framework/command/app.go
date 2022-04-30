@@ -133,7 +133,7 @@ var appStartCommand = &cobra.Command{
 				WorkDir: currentFolder,
 				// 设置所有设置文件的mask，默认为750
 				Umask: 027,
-				// 子进程的参数，按照这个参数设置，子进程的命令为 ./hade app start --daemon=true
+				// 子进程的参数，按照这个参数设置，子进程的命令为 ./lade app start --daemon=true
 				Args: []string{"", "app", "start", "--daemon=true"},
 			}
 			// 启动子进程，d不为空表示当前是父进程，d为空表示当前是子进程
@@ -150,7 +150,7 @@ var appStartCommand = &cobra.Command{
 			defer cntxt.Release()
 			// 子进程执行真正的app启动操作
 			fmt.Println("deamon started")
-			gspt.SetProcTitle("hade app")
+			gspt.SetProcTitle("lade app")
 			if err := startAppServe(server, container); err != nil {
 				fmt.Println(err)
 			}
@@ -164,7 +164,7 @@ var appStartCommand = &cobra.Command{
 		if err != nil {
 			return err
 		}
-		gspt.SetProcTitle("hade app")
+		gspt.SetProcTitle("lade app")
 
 		fmt.Println("app serve url:", appAddress)
 		if err := startAppServe(server, container); err != nil {

@@ -5,6 +5,7 @@ import (
 
 	"github.com/PengLei-Adam/lade/framework"
 	"github.com/PengLei-Adam/lade/framework/contract"
+	"github.com/PengLei-Adam/lade/framework/provider/cache/services"
 )
 
 // LadeCacheProvider 服务提供者
@@ -20,7 +21,7 @@ func (l *LadeCacheProvider) Register(c framework.Container) framework.NewInstanc
 		tcs, err := c.Make(contract.ConfigKey)
 		if err != nil {
 			// 默认使用memory
-			return services.NewMemoryService
+			return services.NewMemoryCache
 
 		}
 

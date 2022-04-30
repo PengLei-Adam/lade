@@ -47,7 +47,6 @@ var swaggerGenCommand = &cobra.Command{
 			// 名字的显示策略，比如首字母大写
 			PropNamingStrategy: "",
 			// 是否要解析vendor目录
-			ParseVender: false,
 			// 是否要解析外部依赖库的包
 			ParseDependency: false,
 			// 是否要解析标准库的包

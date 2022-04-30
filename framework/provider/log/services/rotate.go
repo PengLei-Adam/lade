@@ -14,7 +14,7 @@ import (
 )
 
 // LadeRotateLog 代表会进行切割的日志文件存储
-type HadeRotateLog struct {
+type LadeRotateLog struct {
 	LadeLog
 
 	// 日志文件存储目录
@@ -23,7 +23,7 @@ type HadeRotateLog struct {
 	file string
 }
 
-// NewLadeRotateLog 实例化HadeRotateLog
+// NewLadeRotateLog 实例化LadeRotateLog
 func NewLadeRotateLog(params ...interface{}) (interface{}, error) {
 	// 参数解析
 	c := params[0].(framework.Container)
@@ -44,7 +44,7 @@ func NewLadeRotateLog(params ...interface{}) (interface{}, error) {
 		os.MkdirAll(folder, os.ModePerm)
 	}
 
-	// 从配置文件中获取file信息，否则使用默认的hade.log
+	// 从配置文件中获取file信息，否则使用默认的lade.log
 	file := "lade.log"
 	if configService.IsExist("log.file") {
 		file = configService.GetString("log.file")
@@ -86,7 +86,7 @@ func NewLadeRotateLog(params ...interface{}) (interface{}, error) {
 	}
 
 	// 设置基础信息
-	log := &HadeRotateLog{}
+	log := &LadeRotateLog{}
 	log.SetLevel(level)
 	log.SetCtxFielder(ctxFielder)
 	log.SetFormatter(formatter)
