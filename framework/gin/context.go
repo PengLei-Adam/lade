@@ -43,13 +43,16 @@ const BodyBytesKey = "_gin-gonic/gin/bodybyteskey"
 
 const abortIndex int8 = math.MaxInt8 / 2
 
-// Context is the most important part of gin. It allows us to pass variables between middleware,
-// manage the flow, validate the JSON of a request and render a JSON response for example.
+// Context is composed of Container and BaseContext
 type Context struct {
-
-	// 加入 Container
 	container framework.Container
 
+	*GinBaseContext
+}
+
+// BaseContext is the most important part of gin. It allows us to pass variables between middleware,
+// manage the flow, validate the JSON of a request and render a JSON response for example.
+type GinBaseContext struct {
 	writermem responseWriter
 	Request   *http.Request
 	Writer    ResponseWriter
@@ -91,7 +94,7 @@ type Context struct {
 /********** CONTEXT CREATION ********/
 /************************************/
 
-func (c *Context) reset() {
+func (c *GinBaseContext) reset() {
 	c.Writer = &c.writermem
 	c.Params = c.Params[0:0]
 	c.handlers = nil
@@ -107,10 +110,15 @@ func (c *Context) reset() {
 	*c.skippedNodes = (*c.skippedNodes)[:0]
 }
 
+func (c *Context) reset() {
+	c.GinBaseContext.reset()
+	c.container = nil
+}
+
 // Copy returns a copy of the current context that can be safely used outside the request's scope.
 // This has to be used when the context has to be passed to a goroutine.
-func (c *Context) Copy() *Context {
-	cp := Context{
+func (c *GinBaseContext) Copy() *GinBaseContext {
+	cp := GinBaseContext{
 		writermem: c.writermem,
 		Request:   c.Request,
 		Params:    c.Params,
@@ -127,6 +135,14 @@ func (c *Context) Copy() *Context {
 	paramCopy := make([]Param, len(cp.Params))
 	copy(paramCopy, cp.Params)
 	cp.Params = paramCopy
+	return &cp
+}
+
+func (c *Context) Copy() *Context {
+	cp := Context{
+		container: c.container,
+		GinBaseContext: c.GinBaseContext.Copy(),
+	}
 	return &cp
 }
 

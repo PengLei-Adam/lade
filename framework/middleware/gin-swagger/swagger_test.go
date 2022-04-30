@@ -7,6 +7,7 @@ import (
 
 	"github.com/PengLei-Adam/lade/framework/gin"
 	"github.com/PengLei-Adam/lade/framework/middleware/gin-swagger/swaggerFiles"
+	"github.com/PengLei-Adam/lade/framework/util"
 	"github.com/gin-contrib/gzip"
 	"github.com/swaggo/swag"
 
@@ -125,7 +126,7 @@ func TestWithGzipMiddleware(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 	router := gin.New()
 
-	router.Use(gzip.Gzip(gzip.BestSpeed))
+	router.Use(util.ConvertGinHanderFunc(gzip.Gzip(gzip.BestSpeed)))
 
 	router.GET("/*any", WrapHandler(swaggerFiles.Handler))
 

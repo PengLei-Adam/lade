@@ -208,7 +208,10 @@ func Default() *Engine {
 func (engine *Engine) allocateContext() *Context {
 	v := make(Params, 0, engine.maxParams)
 	skippedNodes := make([]skippedNode, 0, engine.maxSections)
-	return &Context{engine: engine, params: &v, skippedNodes: &skippedNodes}
+	return &Context{
+		GinBaseContext: &GinBaseContext{
+			engine: engine, params: &v, skippedNodes: &skippedNodes},
+	}
 }
 
 // Delims sets template left and right delims and returns a Engine instance.
