@@ -1,5 +1,5 @@
-//go:build linux || darwin
-// +build linux darwin
+//go:build windows
+// +build windows
 
 package command
 
@@ -52,7 +52,7 @@ func startAppServe(server *http.Server, c framework.Container) error {
 	}()
 
 	// 当前的goroutine等待信号量
-	quit := make(chan os.Signal)
+	quit := make(chan os.Signal, 1)
 	// 监控信号：SIGINT, SIGTERM, SIGQUIT
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT)
 	// 这里会阻塞当前goroutine等待信号
@@ -200,7 +200,8 @@ var appRestartCommand = &cobra.Command{
 			}
 			if util.CheckProcessExist(pid) {
 				// 杀死进程
-				if err := syscall.Kill(pid, syscall.SIGTERM); err != nil {
+				proc, _ := os.FindProcess(pid)
+				if err := proc.Kill(); err != nil {
 					return err
 				}
 
@@ -213,7 +214,7 @@ var appRestartCommand = &cobra.Command{
 
 				// 确认进程已经关闭,每秒检测一次， 最多检测closeWait * 2秒
 				for i := 0; i < closeWait*2; i++ {
-					if util.CheckProcessExist(pid) == false {
+					if !util.CheckProcessExist(pid) {
 						break
 					}
 					time.Sleep(1 * time.Second)
@@ -259,10 +260,12 @@ var appStopCommand = &cobra.Command{
 			if err != nil {
 				return err
 			}
-			// 发送SIGTERM命令
-			if err := syscall.Kill(pid, syscall.SIGTERM); err != nil {
+			// windows下kill进程，注意无法处理信号
+			proc, err := os.FindProcess(pid)
+			if err != nil {
 				return err
 			}
+			proc.Kill()
 			if err := ioutil.WriteFile(serverPidFile, []byte{}, 0644); err != nil {
 				return err
 			}

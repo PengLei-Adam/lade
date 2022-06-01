@@ -1,5 +1,5 @@
-//go:build linux || darwin
-// +build linux darwin
+//go:build windows
+// +build windows
 
 package distributed
 
@@ -8,8 +8,9 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"syscall"
 	"time"
+
+	syscall "golang.org/x/sys/windows"
 
 	"github.com/PengLei-Adam/lade/framework"
 	"github.com/PengLei-Adam/lade/framework/contract"
@@ -44,7 +45,7 @@ func (s LocalDistributedService) Select(serviceName string, appID string, holdTi
 	}
 
 	// 尝试独占文件锁
-	err = syscall.Flock(int(lock.Fd()), syscall.LOCK_EX|syscall.LOCK_NB)
+	err = syscall.LockFileEx(syscall.Handle(lock.Fd()), syscall.LOCKFILE_EXCLUSIVE_LOCK, 0, 0, 1, nil)
 	// 没有抢到文件锁
 	if err != nil {
 		// 读取被选择的appid
@@ -59,7 +60,7 @@ func (s LocalDistributedService) Select(serviceName string, appID string, holdTi
 	go func() {
 		defer func() {
 			// 释放文件锁
-			syscall.Flock(int(lock.Fd()), syscall.LOCK_UN)
+			syscall.UnlockFileEx(syscall.Handle(lock.Fd()), 0, 0, 1, nil)
 			// 释放文件
 			lock.Close()
 			// 删除文件

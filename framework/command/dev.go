@@ -10,7 +10,6 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
-	"syscall"
 	"time"
 
 	"github.com/PengLei-Adam/lade/framework"
@@ -147,7 +146,10 @@ func (p *Proxy) rebuildBackend() error {
 func (p *Proxy) restartBackend() error {
 	// 杀死之前的的进程
 	if p.backendPid != 0 {
-		syscall.Kill(p.backendPid, syscall.SIGKILL)
+		proc, err := os.FindProcess(p.backendPid)
+		if err == nil {
+			proc.Kill()
+		}
 		p.backendPid = 0
 	}
 

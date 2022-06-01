@@ -16,7 +16,7 @@ func AddKernelCommands(root *cobra.Command) {
 	root.AddCommand(initEnvCommand())
 
 	// config
-	root.AddCommand(initAppCommand())
+	root.AddCommand(initConfigCommand())
 
 	// npm build
 	root.AddCommand(initBuildCommand())

@@ -6,7 +6,6 @@ import (
 	"os"
 	"path/filepath"
 	"strconv"
-	"syscall"
 	"time"
 
 	"github.com/PengLei-Adam/lade/framework/cobra"
@@ -142,7 +141,8 @@ var cronRestartCommand = &cobra.Command{
 				return err
 			}
 			if util.CheckProcessExist(pid) {
-				if err := syscall.Kill(pid, syscall.SIGTERM); err != nil {
+				proc, _ := os.FindProcess(pid)
+				if err := proc.Kill(); err != nil {
 					return err
 				}
 				// check process closed
@@ -181,9 +181,12 @@ var cronStopCommand = &cobra.Command{
 			if err != nil {
 				return err
 			}
-			if err := syscall.Kill(pid, syscall.SIGTERM); err != nil {
+			proc, err := os.FindProcess(pid)
+			if err != nil {
 				return err
 			}
+			proc.Kill()
+
 			if err := ioutil.WriteFile(serverPidFile, []byte{}, 0644); err != nil {
 				return err
 			}
