@@ -516,6 +516,8 @@ func (engine *Engine) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	c.writermem.reset(w)
 	c.Request = req
 	c.reset()
+	// Add SetContainer
+	c.container = engine.container
 
 	engine.handleHTTPRequest(c)
 
