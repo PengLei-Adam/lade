@@ -58,9 +58,9 @@ func (lade *LadeContainer) PrintProviders() []string {
 func (lade *LadeContainer) Bind(provider ServiceProvider) error {
 	// 涉及写操作，加锁
 	lade.lock.Lock()
-	defer lade.lock.Unlock()
 
 	key := provider.Name()
+	lade.lock.Unlock()
 
 	lade.providers[key] = provider
 
@@ -70,7 +70,6 @@ func (lade *LadeContainer) Bind(provider ServiceProvider) error {
 		if err := provider.Boot(lade); err != nil {
 			return err
 		}
-
 		// 实例化方法
 		params := provider.Params(lade)
 		method := provider.Register(lade)

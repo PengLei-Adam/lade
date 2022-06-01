@@ -18,21 +18,18 @@ type LadeApp struct {
 	configMap map[string]string // 配置加载
 }
 
-func (h LadeApp) AddID() string {
-	return h.appId
+func (l LadeApp) AppID() string {
+	return l.appId
+}
+
+func (l LadeApp) Version() string {
+	return "0.0.2"
 }
 
 // BaseFolder 表示基础目录，可以代表开发场景的目录，也可以代表运行时候的目录
 func (h LadeApp) BaseFolder() string {
 	if h.baseFolder != "" {
 		return h.baseFolder
-	}
-	// 如果没有设置，则使用参数
-	var baseFolder string
-	flag.StringVar(&baseFolder, "base_folder", "", "base_folder 参数, 默认为当前路径")
-	flag.Parse()
-	if baseFolder != "" {
-		return baseFolder
 	}
 	// 如果参数也没有，使用默认的当前路径
 	return util.GetExecDirectory()
